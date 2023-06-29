@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-import json
+from drf_yasg.utils import swagger_auto_schema
 
 from .bacterie import Bacteria, Strain
 from .models import StrainModel
@@ -20,6 +20,7 @@ class StrainViewSet(ModelViewSet):
     serializer_class = StrainSerializer
     queryset = StrainModel.objects.all()
 
+@swagger_auto_schema(methods=['post'], request_body=StrainCountSerializer)
 @api_view(['POST'])
 def population(request):
 
